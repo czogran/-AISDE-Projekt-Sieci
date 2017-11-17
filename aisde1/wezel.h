@@ -2,5 +2,5 @@
 #include<iostream>
 void()
 {
-
+	//Adnotacja 2
 }
