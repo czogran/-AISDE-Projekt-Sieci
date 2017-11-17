@@ -4,12 +4,13 @@
 #include <string>
 #include "wezel.h"
 #include "krawendz.h"
+#include "rysowanie.h"
 
 using namespace std;
 int main()
-//adnotacja
-{
 
+{
+	
 	int x, y, nr;
 	fstream plik;
 	plik.open("dane.txt", ios::in); //otwieramy plik w trybie tylko do odczytu - parametr "r"
@@ -49,7 +50,10 @@ int main()
 	Wezel a(5, 4, 1);
 	Wezel b(1, 1, 2);
 	Krawendz c(a, b, 3);
-	
+
+	//rysuj_krawedz(a.x, a.y, b.x, b.y);
+	//rysuj_wezel(a.x, a.y);					//Tak mozna uzywac funkcji rysowania
+	//rysuj_wezel(b.x, b.y);
 	
 	return 0;
 }
