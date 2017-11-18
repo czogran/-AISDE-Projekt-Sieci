@@ -10,8 +10,19 @@
 class Sciezka
 {
 public:
-	vector <Krawendz> posgregowane;
+	vector <Krawendz> krawendzie;
 	vector <Wezel> wezly;
+	int a;
+	Sciezka(int b);
 	Sciezka();
-	Sciezka();
+	~Sciezka();
 };
+
+Sciezka::Sciezka(int b)
+{
+	a = b;
+}
+Sciezka::~Sciezka()
+{
+
+}
