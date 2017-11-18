@@ -36,7 +36,7 @@ inline Wezel::Wezel(int nr, int os_x, int os_y)
 	x = os_x;
 	y = os_y;
 	numer = nr;
-	koszt = 0;
+	koszt = 2147483647;
 	wejscie=0;
 }
 
