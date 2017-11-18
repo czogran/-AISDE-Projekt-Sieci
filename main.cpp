@@ -31,6 +31,7 @@ int main()
 	{
 
 		getline(plik, linia);
+		cout << linia << "\n";
 		if (linia[0] == '#')
 		{
 			cout << "#\n";
@@ -71,10 +72,11 @@ int main()
 	plik.close(); //zamykamy plik
 
 	
-	cout << "\n";
+	cout << "\n"<<"\n"<<"\n";
 	//cout << "\n" << wezly.size();
-	kruskal(krawendzie, wezly);
-	dijkstra(wezly, krawendzie, 1, 4);
+	//kruskal(krawendzie, wezly);
+	//cout << "\ndixtry wiercholek 3 z 5\n";
+	dijkstra(wezly, krawendzie, 2, 5);
 	for (int n = 1;n < 4;n++)
 	{
 		//cout << "sss";
