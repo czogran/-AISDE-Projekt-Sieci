@@ -2,58 +2,85 @@
 #include <fstream>
 #include <stdio.h>
 #include <string>
+#include <vector>
 #include "wezel.h"
 #include "krawendz.h"
-#include "rysowanie.h"
+#include "kruskal.h"
+#include "dijkstra.h"
 
 using namespace std;
 int main()
-
+//adnotacja
 {
 	
+	vector <Krawendz> krawendzie;
+	vector<Wezel> wezly;
+
 	int x, y, nr;
+	int pozycja_w_pliku;
+	int dlugos_lini;
+	//int ile_wezlow;
+	//int ile_krawendzie;
+	char znak; //by wiedziec czy wczytujemy do krawendzi, czy wezlow
 	fstream plik;
 	plik.open("dane.txt", ios::in); //otwieramy plik w trybie tylko do odczytu - parametr "r"
 
-	char znak;
+	
 	string linia;
-	do
+	while (!plik.eof())
 	{
-		
+
 		getline(plik, linia);
-		//if (znak == '#')
-		if(linia[0]=='#')
+		if (linia[0] == '#')
 		{
-			cout << "#";
+			cout << "#\n";
 		}
-		else if (linia[0]=='W'||linia[0]=='L')
+		else if (linia[0] == 'W'|| linia[0] == 'L')//||linia[0]=='A')
 		{
-			cout << "\nznalzlem";
+			
+			znak = linia[0];
+			cout << "\nznalzlem";// << ile_wezlow << "aa\n";
+			cout << "\n";
+		}
+
+		else if (linia[0] == 'A')
+		{
+			break;
 		}
 		else
 		{
-			//x = linia;
-			
-			//cout << linia;
-			//cout << "\n";
+			pozycja_w_pliku = plik.tellp(); // dostajemy pozycje pliku
+			dlugos_lini = linia.size();     //jak d³uga jest linia
+			plik.seekp(pozycja_w_pliku - dlugos_lini - 2);//wraca by odczytac wartosc x, y nr do poprzedniego wiersza, 2 jest empiryczna
+			plik >> nr >> x >> y; //wczytuje x y nr
+			if (znak=='W')
+			{
+				wezly.push_back(Wezel(nr,x,y));
+			}
+			else
+			{
+				krawendzie.push_back(Krawendz(wezly[x - 1], wezly[y - 1], nr));
+			}
+			//cout << nr << "   " << x << "  " << y << "\n";
+			pozycja_w_pliku = plik.tellp();//znowu sprawdza pozycje
+			plik.seekp(pozycja_w_pliku+2);// ustawia pozycje na poczotek nowego wiersza, by mozna bylo getlinem sprawdzic co tam jest
 		}
-		//getline(plik, linia);
-		 //linia.begin();
-
-		
-		//zapisujê jeden znak z pliku
-		//cout << linia << endl; //wypsiujê na ekran
-	} while (!plik.eof()); //End Of File - koniec pliku
+	}
+	
 
 	plik.close(); //zamykamy plik
 
-	Wezel a(5, 4, 1);
-	Wezel b(1, 1, 2);
-	Krawendz c(a, b, 3);
-
-	//rysuj_krawedz(a.x, a.y, b.x, b.y);
-	//rysuj_wezel(a.x, a.y);					//Tak mozna uzywac funkcji rysowania
-	//rysuj_wezel(b.x, b.y);
+	
+	cout << "\n";
+	//cout << "\n" << wezly.size();
+	kruskal(krawendzie, wezly);
+	dijkstra(wezly, krawendzie, 1, 4);
+	for (int n = 1;n < 4;n++)
+	{
+		//cout << "sss";
+		//cout << wezly[1].poloczenia[n] << "\n";
+	}
+	
 	
 	return 0;
 }
