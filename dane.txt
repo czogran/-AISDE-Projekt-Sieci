@@ -2,10 +2,10 @@
 # kolejnosc danych bedzie zawsze taka sama
 # liczba wezlow, wezly numerowane sa od 1
 WEZLY = 5
-# kazdy wezel to trojka (identyfikator, wspolrzedna X, wspolrzedna Y)
-1 10 50
+# kazdy wezel to trojka (identyfikator, wspolrzedna X, wspolrzedna Y)       
+   1 10 50
 2 30 56
-3 45 32
+    3 45 32
 4 90 23
 5 44 33
 # liczba krawedzi

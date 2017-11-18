@@ -23,8 +23,8 @@ int main()
 	//int ile_krawendzie;
 	char znak; //by wiedziec czy wczytujemy do krawendzi, czy wezlow
 	fstream plik;
-	plik.open("dane.txt", ios::in); //otwieramy plik w trybie tylko do odczytu - parametr "r"
-
+	plik.open("dane1.txt", ios::in); //otwieramy plik w trybie tylko do odczytu - parametr "in"
+	cout << "test\n";
 	
 	string linia;
 	while (!plik.eof())
@@ -74,7 +74,12 @@ int main()
 	
 	cout << "\n"<<"\n"<<"\n";
 	//cout << "\n" << wezly.size();
-	//kruskal(krawendzie, wezly);
+	for (int n = 0;n < 5;n++)
+	{
+		cout << "\n" << krawendzie[n].dlugosc;
+	}
+	cout << "\n";
+	kruskal(krawendzie, wezly);
 	//cout << "\ndixtry wiercholek 3 z 5\n";
 	dijkstra(wezly, krawendzie, 2, 5);
 	for (int n = 1;n < 4;n++)

@@ -6,7 +6,7 @@
 
 
 
-void kruskal(vector<Krawendz> kraw, vector<Wezel> wezel)
+void kruskal(vector<Krawendz> kraw, vector<Wezel> wezel) // trzeba bêdzie jeszcze zrobiæ dla skierowanego
 {
 	Sciezka sciezka(1);
 	int test;
@@ -28,12 +28,12 @@ void kruskal(vector<Krawendz> kraw, vector<Wezel> wezel)
 
 		}
 	}
-/*
+
 	for (int n = 0;n < operacyjny.size();n++)
 	{
-		cout << operacyjny[n].dlugosc << "\n";
+		//cout << operacyjny[n].dlugosc << "\n";
 	}
-*/
+
 
 	for (int n = 0;n < wezel.size();n++)							//do tworzenia sztywnej tablicy, by ³atwiej by³o siê po niej poruszac
 	{
@@ -120,7 +120,7 @@ void kruskal(vector<Krawendz> kraw, vector<Wezel> wezel)
 
 	cout << "\n";
 
-	for (int n = 0;n < 4;n++) //wyswietlanie by pokazac, ze jest OK
+	for (int n = 0;n < sciezka.krawendzie.size();n++) //wyswietlanie by pokazac, ze jest OK
 	{
 		cout << sciezka.krawendzie[n].dlugosc<<"\n";
 

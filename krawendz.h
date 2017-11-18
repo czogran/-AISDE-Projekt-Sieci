@@ -13,6 +13,7 @@ public:
 	int wezel_a;
 	int wezel_b;
 	int numer;
+	bool uzyta;
 	double dlugosc;
 
 	Krawendz(Wezel a, Wezel b, int nr);
@@ -27,6 +28,7 @@ Krawendz::Krawendz(Wezel a, Wezel b, int nr)
 	wezel_a = a.numer;
 	wezel_b = b.numer;
 	numer = nr;
+	uzyta = false;
 	int pomocnicza;
 	pomocnicza = (a.x - b.x) * (a.x - b.x)+(a.y - b.y)*(a.y - b.y);
 	
