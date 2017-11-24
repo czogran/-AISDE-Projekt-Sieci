@@ -13,12 +13,16 @@ void floyd(vector <Wezel> wezely, vector <Krawendz> krawedzie)
 {
 	const int size_a=wezely.size();
 	double **tablica;//[size_a]size_a];
+	int **poloczenia;
 	tablica = new double *[size_a];
+	poloczenia = new int *[size_a];
 	for (int i = 0;i < size_a;i++)
 	{
 		tablica[i] = new double[size_a];
+		poloczenia[i] = new int[size_a];
 		for (int n = 0;n < size_a;n++)
 		{
+			poloczenia [i][n] = 0;
 			if (i == n)
 				tablica[i][n] = 0;
 			else
@@ -53,12 +57,15 @@ void floyd(vector <Wezel> wezely, vector <Krawendz> krawedzie)
 		for (int i = 0; i < size_a; i++)
 			for (int j = 0; j < size_a; j++)
 			{
-				if ((tablica[i][k] == INFINITY) || (tablica[k][j] == INFINITY)) continue;
+				// ((tablica[i][k] == INFINITY) || (tablica[k][j] == INFINITY)) continue;
 				w = tablica[i][k] + tablica[k][j];
 				if (tablica[i][j] > w)
 				{
+					poloczenia[i][j] = k;//indeksowanie od 0-> 0 znaczy, ze jest to 1 wezel
+
 					tablica[i][j] = w;
 					tablica[j][i] = w; //gdy jest nieskierowany
+					poloczenia[j][i] = k;//gdy jest nieskierowany
 				}
 			}
 
@@ -71,16 +78,30 @@ void floyd(vector <Wezel> wezely, vector <Krawendz> krawedzie)
 		}
 		cout << "\n";
 	}
-
-
-
+	int i = 2;
+	int j = 4;
+	int k = poloczenia[i][j];
+	cout << "\n";
+	if (poloczenia[i][j] != 0)
+	{
+		
+		cout << k + 1 << "\n";
+		while (poloczenia[i][k] != 0)
+		{
+			cout << k + 1 << "\n";
+			k = poloczenia[i][k];
+		}
+	}
+	
 
 
 	for (int i = 0;i < size_a;i++)
 	{
+		delete[] poloczenia[i];
 		delete[] tablica[i];
 	}
 
+	delete[] poloczenia;
 	delete[]  tablica; // tu moze byc wyciek pamieci
 	
 }
