@@ -7,7 +7,7 @@
 #include "krawendz.h"
 
 
-void dijkstra(vector<Wezel> wezel, vector<Krawendz>krawendz, int start, int end)
+Sciezka dijkstra(vector<Wezel> wezel, vector<Krawendz>krawendz, int start, int end,bool czy_skierowane)
 {
 	Sciezka sciezka(1);
 	int aktualny_nr;
@@ -18,7 +18,7 @@ void dijkstra(vector<Wezel> wezel, vector<Krawendz>krawendz, int start, int end)
 	wezel[aktualny_nr - 1].wejscie = start;
 	wezel[aktualny_nr - 1].koszt = 0; //na start trzeba ustawic 0
 	//while (aktualny_nr =~ end)
-	for(int n=0;n<12;n--) //petla nieskonczona nie wiem czemu z while nie dziala
+	for(int n=0;n<wezel.size();n++) //zmienione z petli nisekonczonej na przypadek gdy jakis wezel jest niepoloczony
 	{
 		//cout << "\n" << aktualny_nr<<"   "<<end<<"\n";
 		for (int i = 0;i < krawendz.size();i++)
@@ -31,7 +31,7 @@ void dijkstra(vector<Wezel> wezel, vector<Krawendz>krawendz, int start, int end)
 					wezel[krawendz[i].wezel_b - 1].wyjscie = krawendz[i].wezel_a;
 				}
 			}
-			if (krawendz[i].wezel_b == aktualny_nr)
+			if (krawendz[i].wezel_b == aktualny_nr && czy_skierowane==false)
 			{
 				if ( wezel[krawendz[i].wezel_a - 1].koszt > krawendz[i].dlugosc + wezel[aktualny_nr - 1].koszt)       //(wezel[krawendz[i].wezel_a - 1].wejscie==0 &(wezel[krawendz[i].wezel_a - 1].koszt == 0 || wezel[krawendz[i].wezel_a - 1].koszt > krawendz[i].dlugosc + wezel[aktualny_nr - 1].koszt))
 				{
@@ -40,18 +40,13 @@ void dijkstra(vector<Wezel> wezel, vector<Krawendz>krawendz, int start, int end)
 				}
 			}
 		}
-		/*
-		for (int n = 0; n < wezel.size();n++)
-			{
-				cout << "\nnr: " << n+1<<"      "<<wezel[n].koszt;
-			}
-			*/
+		
 		najmniejszy_koszt = 2147483647;
 		for (int i = 0; i < wezel.size();i++)
 		{
 			if	(wezel[i].koszt < najmniejszy_koszt)  //((najmniejszy_koszt == 0 || wezel[i].koszt < najmniejszy_koszt))
 			{
-				if (wezel[i].wejscie == 0 &wezel[i].koszt>0)
+				if (wezel[i].wejscie == 0 &wezel[i].koszt>0) // zalozenie ze nie do poloczonego nie da sie dojsc szybciej, koszt>0 by nie dodac jeszcze raz startowego
 				{
 					najmniejszy_koszt = wezel[i].koszt;
 					nr_wezla = i; //indeksowanie od 0
@@ -83,5 +78,8 @@ void dijkstra(vector<Wezel> wezel, vector<Krawendz>krawendz, int start, int end)
 		cout << sciezka.wezly[i].numer;
 
 	}
+	sciezka.koszt = wezel[end - 1].koszt;
 	cout << "\nkoszt to: " << wezel[end - 1].koszt << "\n";
+	//rysuj_graf_sciezka(wezel, krawendz, sciezka);
+	return sciezka;
 }
